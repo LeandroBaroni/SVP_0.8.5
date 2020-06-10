@@ -1,0 +1,442 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package View.Venda;
+
+import Dao.Class.BilhetePdf;
+import Dao.Class.Venda;
+import Dao.Controller.BilhetePdfControlador;
+import Dao.Controller.VendaControlador;
+import View.MenuPrincipal;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Leandro Baroni
+ */
+
+public class DevolucaoBilhete extends javax.swing.JFrame {
+
+    DefaultTableModel model;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat sdfNormal = new SimpleDateFormat("dd/MM/yyyy");
+    List<BilhetePdf> B = new ArrayList<>();
+    BilhetePdfControlador BC = new BilhetePdfControlador();
+    Venda V = new Venda();
+    VendaControlador VC = new VendaControlador();
+
+    public String usuario;
+
+    /**
+     * Creates new form DevolucaoBilhete
+     */
+    public DevolucaoBilhete() {
+        initComponents();
+    }
+
+    public void setValores(){
+        setBotoes();
+        jDateChooser.setDate(new Date());
+    }
+
+    public void setBotoes(){
+        btConfirmar.setVisible(false);
+    }
+
+    public void setBotoesOn(){
+        txtValor.setEnabled(false);
+        btConfirmar.setVisible(true);
+    }
+
+    public void setTableData(String dataViagem, int servico, String nome, int codBilhete){
+        model = (DefaultTableModel) jTable.getModel();
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        B = (List<BilhetePdf>) BC.getDadosBilheteCancelamento(dataViagem, servico, nome, codBilhete);
+        Object rowData[] = new Object[9];
+        model.setRowCount(0);
+        for(int i =0; i< B.size(); i++){
+            rowData[0] = i;
+            rowData[1] = B.get(i).getCodBilhete().getCodBilhete();
+            rowData[2] = B.get(i).getDataViagem().getdViagem();
+            rowData[3] = B.get(i).getHoraViagem().getdViagem();
+            rowData[4] = B.get(i).getNumPoltrona().getNumPoltrona();
+            rowData[5] = B.get(i).getNomeCliente().getNomeCliente();
+            rowData[6] = B.get(i).getRgCliente().getNomeCliente();
+            rowData[7] = B.get(i).getCpfCnpjCliente().getNomeCliente();
+            rowData[8] = df.format(B.get(i).getValorTotal().getPrecoTotal());
+            model.addRow(rowData);
+        }
+        setBotoesOn();
+    }
+
+    public void setTableDataByCod(String dataViagem, int codServico, int bilhete){
+        model = (DefaultTableModel) jTable.getModel();
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        B = (List<BilhetePdf>) BC.getDadosBilheteCancelamentoPorBilhete(dataViagem, codServico, bilhete);
+        Object rowData[] = new Object[9];
+        model.setRowCount(0);
+        for(int i =0; i< B.size(); i++){
+            rowData[0] = i;
+            rowData[1] = B.get(i).getCodBilhete().getCodBilhete();
+            rowData[2] = B.get(i).getDataViagem().getdViagem();
+            rowData[3] = B.get(i).getHoraViagem().getdViagem();
+            rowData[4] = B.get(i).getNumPoltrona().getNumPoltrona();
+            rowData[5] = B.get(i).getNomeCliente().getNomeCliente();
+            rowData[6] = B.get(i).getRgCliente().getNomeCliente();
+            rowData[7] = B.get(i).getCpfCnpjCliente().getNomeCliente();
+            rowData[8] = df.format(B.get(i).getValorTotal().getPrecoTotal());
+            model.addRow(rowData);
+        }
+        setBotoesOn();
+    }
+
+    public void setTableDataByName(String dataViagem, int codServico, String nome){
+        model = (DefaultTableModel) jTable.getModel();
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        B = (List<BilhetePdf>) BC.getDadosBilheteCancelamentoPorNome(dataViagem, codServico, nome);
+        Object rowData[] = new Object[9];
+        model.setRowCount(0);
+        for(int i =0; i< B.size(); i++){
+            rowData[0] = i;
+            rowData[1] = B.get(i).getCodBilhete().getCodBilhete();
+            rowData[2] = B.get(i).getDataViagem().getdViagem();
+            rowData[3] = B.get(i).getHoraViagem().getdViagem();
+            rowData[4] = B.get(i).getNumPoltrona().getNumPoltrona();
+            rowData[5] = B.get(i).getNomeCliente().getNomeCliente();
+            rowData[6] = B.get(i).getRgCliente().getNomeCliente();
+            rowData[7] = B.get(i).getCpfCnpjCliente().getNomeCliente();
+            rowData[8] = df.format(B.get(i).getValorTotal().getPrecoTotal());
+            model.addRow(rowData);
+        }
+        setBotoesOn();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
+        btConfirmar = new javax.swing.JButton();
+        btVoltar = new javax.swing.JButton();
+        txtValor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
+        btBuscar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtServico = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtBilhete = new javax.swing.JFormattedTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Bilhete", "Data da Viagem", "Horário", "Poltrona", "Nome", "RG", "CPF", "Preço"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(0).setResizable(false);
+            jTable.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable.getColumnModel().getColumn(1).setResizable(false);
+            jTable.getColumnModel().getColumn(1).setPreferredWidth(80);
+            jTable.getColumnModel().getColumn(2).setResizable(false);
+            jTable.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jTable.getColumnModel().getColumn(3).setResizable(false);
+            jTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+            jTable.getColumnModel().getColumn(4).setResizable(false);
+            jTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable.getColumnModel().getColumn(5).setResizable(false);
+            jTable.getColumnModel().getColumn(5).setPreferredWidth(250);
+            jTable.getColumnModel().getColumn(6).setResizable(false);
+            jTable.getColumnModel().getColumn(6).setPreferredWidth(150);
+            jTable.getColumnModel().getColumn(7).setResizable(false);
+            jTable.getColumnModel().getColumn(7).setPreferredWidth(150);
+            jTable.getColumnModel().getColumn(8).setResizable(false);
+        }
+
+        btConfirmar.setText("Confirmar");
+        btConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfirmarActionPerformed(evt);
+            }
+        });
+
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Valor a devolver: ");
+
+        btBuscar.setText("Buscar");
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Data da Viagem: ");
+
+        jLabel3.setText("Serviço: ");
+
+        try {
+            txtServico.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtServico.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel4.setText("Nome: ");
+
+        jLabel5.setText("Bilhete: ");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btConfirmar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtServico))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtBilhete, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                        .addComponent(btBuscar)
+                        .addGap(72, 72, 72)))
+                .addContainerGap())
+            .addComponent(jSeparator1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(txtServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtBilhete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btConfirmar)
+                    .addComponent(btVoltar)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(8, 8, 8))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        MenuPrincipal tela = new MenuPrincipal(null ,true);
+        tela.usuario = this.usuario;
+        tela.setValores();
+        this.dispose();
+        tela.setLocationRelativeTo(null);
+        tela.setVisible(true);
+    }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        jTable.editingCanceled(null);
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        int linhaSelec = jTable.getSelectedRow();
+        if(jTable.getSelectedRow() == -1){
+            if(jTable.getSelectedRowCount() == 0){
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Tabela está vazia", "Não Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Selecione um Perfil !!!", "Não Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            double valor = Double.parseDouble(model.getValueAt(linhaSelec, 8).toString().replace(",", "."));
+            double valorDevolucao = valor - (valor * 0.05);
+            txtValor.setText(df.format(valorDevolucao));
+        }
+    }//GEN-LAST:event_jTableMouseClicked
+
+    private void jTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMousePressed
+        jTable.editingCanceled(null);
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        int linhaSelec = jTable.getSelectedRow();
+        if(jTable.getSelectedRow() == -1){
+            if(jTable.getSelectedRowCount() == 0){
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Tabela está vazia", "Não Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Selecione um Perfil !!!", "Não Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            double valor = Double.parseDouble(model.getValueAt(linhaSelec, 8).toString().replace(",", "."));
+            double valorDevolucao = valor - (valor * 0.05);
+            txtValor.setText(df.format(valorDevolucao));
+        }
+    }//GEN-LAST:event_jTableMousePressed
+
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        String dataViagem;
+        int codServico;
+        String nome;
+        int bilhete;
+        if(!txtServico.getText().trim().equalsIgnoreCase("") && !jDateChooser.getDate().toString().trim().equals("")){
+            dataViagem = sdf.format(jDateChooser.getDate());
+            codServico = Integer.parseInt(txtServico.getText());
+            System.out.println("0");
+            if(!txtNome.getText().trim().equalsIgnoreCase("") && !txtBilhete.getText().trim().equalsIgnoreCase("")){
+                nome = txtNome.getText();
+                bilhete = Integer.parseInt(txtBilhete.getText());
+                System.out.println("1");
+                setTableData(dataViagem, codServico, nome, bilhete);
+            }else if(!txtNome.getText().trim().equalsIgnoreCase("") && txtBilhete.getText().trim().equalsIgnoreCase("")){
+                nome = txtNome.getText();
+                System.out.println("2");
+                setTableDataByName(dataViagem, codServico, nome);
+            }else if(txtNome.getText().trim().equalsIgnoreCase("") && !txtBilhete.getText().trim().equalsIgnoreCase("")){
+                bilhete = Integer.parseInt(txtBilhete.getText());
+                System.out.println("3");
+                setTableDataByCod(dataViagem, codServico, bilhete);
+            }else{
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Preencha os campos de Nome e do Bilhete", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            this.toBack();
+            JOptionPane.showMessageDialog(null, "Digite a Data e o Serviço de Viagem.", "Erro de Data/Serviço", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
+        int linhaSelec = jTable.getSelectedRow();
+        if(jTable.getSelectedRow() == -1){
+            if(jTable.getSelectedRowCount() == 0){
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Tabela está vazia", "Não Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Selecione um Perfil !!!", "Não Encontrado", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            int cBilhete = Integer.parseInt(model.getValueAt(linhaSelec, 1).toString());
+            String cNome = model.getValueAt(linhaSelec, 5).toString();
+            int cPoltrona = Integer.parseInt(model.getValueAt(linhaSelec, 4).toString());
+
+            this.toBack();
+            int i = JOptionPane.showConfirmDialog(null, "Deseja devolver BILHETE: " + cBilhete + "\nPassageiro: " + cNome + "?", 
+                    "Devolução de Bilhete", JOptionPane.YES_NO_OPTION);
+            if(i == JOptionPane.YES_OPTION){
+                double valorDevolver = Double.parseDouble(txtValor.getText().replace(",", "."));
+                V = new Venda(cBilhete, valorDevolver, cNome, cPoltrona);
+                VC.devolverBilhete(V);
+                setValores();
+            }else if(i == JOptionPane.NO_OPTION){
+                this.toBack();
+                JOptionPane.showMessageDialog(null, "Devolução de Bilhete Cancelado", "Fechar", JOptionPane.CLOSED_OPTION);
+            }
+        }
+    }//GEN-LAST:event_btConfirmarActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBuscar;
+    private javax.swing.JButton btConfirmar;
+    private javax.swing.JButton btVoltar;
+    private com.toedter.calendar.JDateChooser jDateChooser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable;
+    private javax.swing.JFormattedTextField txtBilhete;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JFormattedTextField txtServico;
+    private javax.swing.JTextField txtValor;
+    // End of variables declaration//GEN-END:variables
+}

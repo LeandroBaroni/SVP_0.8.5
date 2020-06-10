@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="iReportMapaViagem" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aee27d96-a47e-4b12-bd4f-f62a784ca8d0">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataViagem" class="java.lang.String"/>
+	<parameter name="codServico" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT v.num_poltrona, v.nome, v.documento, v.documento2, l.cidade_inicial, c1.cidade as nomeCidade1, l.cidade_final, c2.cidade as nomeCidade2, v.telefone, s.horario_viagem, s.numero_carro, s.motorista, s.codPrefixo, s.mensagem
+FROM servico s, venda v, linha l, cidade c1, cidade c2
+WHERE s.data_viagem = $P{dataViagem}
+	AND s.codigo = $P{codServico} AND v.estado = 'V' AND s.codigo = v.servico_codigo
+	AND v.linha_id = l.id AND l.cidade_inicial = c1.codigo AND l.cidade_final = c2.codigo
+ORDER BY v.num_poltrona;]]>
+	</queryString>
+	<field name="num_poltrona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="documento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="documento2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cidade_inicial" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomeCidade1" class="java.lang.String"/>
+	<field name="cidade_final" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomeCidade2" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horario_viagem" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero_carro" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="motorista" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codPrefixo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mensagem" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="71" y="11" width="431" height="35" uuid="dc0aeb63-a62b-4cbb-a58d-81244d303a63"/>
+				<textElement>
+					<font size="18" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Fatec - Faculdade de tecnologia de Presidente Prudente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="27" width="85" height="20" uuid="3ea10e02-3d28-4b2e-b27b-2d2722f89181"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Viagem: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="27" width="87" height="20" uuid="2845fdc9-3231-4fb6-9c5f-b0b74cac31bf"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataViagem}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="27" width="50" height="20" uuid="f636a25a-9f26-4cc2-859e-bded45507f8b"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Serviço: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="330" y="27" width="100" height="20" uuid="300b7cc4-b873-43e0-bc77-8ccbf3f64783"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{codServico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="98" height="20" uuid="0c7055da-f3bb-4bca-9edc-2e63d0c464d3"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mapa de Viagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="27" width="41" height="20" uuid="9412b375-34c9-4891-b5cf-492038a4d50f"/>
+				<text><![CDATA[Prefixo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="471" y="27" width="84" height="20" uuid="f1e1d6b1-2562-495d-9f06-e25fefe9bf9f"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codPrefixo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="172" y="27" width="40" height="20" uuid="d0a7d551-2002-4ca3-a541-8830f282ee43"/>
+				<text><![CDATA[Horário: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="209" y="27" width="71" height="20" uuid="c46218c7-6fa5-4db2-ba11-e35789c03182"/>
+				<textFieldExpression><![CDATA[$F{horario_viagem}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="23" width="24" height="20" uuid="da33cbd0-f4ac-41b0-8085-7832b9867959"/>
+				<textElement>
+					<font isBold="true" isItalic="false" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Polt.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="23" width="33" height="20" uuid="52a7904d-4ffe-4abe-92ba-0b68458fa108"/>
+				<textElement>
+					<font isBold="true" isItalic="false" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="23" width="92" height="20" uuid="c5621fdd-9185-4564-bde8-947e512b7884"/>
+				<textElement>
+					<font isBold="true" isItalic="false" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Documentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="502" y="23" width="47" height="20" uuid="843c5cb7-02b7-4f1f-8e0d-c5570fdd5215"/>
+				<textElement>
+					<font isBold="true" isItalic="false" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="23" width="55" height="20" uuid="4c63bd32-78e4-4c72-bd00-59d84305d391"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Origem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="398" y="23" width="56" height="20" uuid="79fd8a7f-2555-4797-9ab7-7cdd2921bb74"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Destino]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="24" height="20" uuid="393fd1fd-3e6e-4696-82ef-bd8c18e027ba"/>
+				<textFieldExpression><![CDATA[$F{num_poltrona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="0" width="129" height="20" uuid="2619c644-6ed2-4242-8305-9a636780d9c9"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="0" width="92" height="20" uuid="c837702f-d98a-44d6-9ab7-3fa2499d3521"/>
+				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="491" y="0" width="64" height="20" uuid="833629b7-4eec-4055-a54b-1f845fa5c9fc"/>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="0" width="25" height="20" uuid="4763fe3d-ea59-4761-8d4e-ee908a48af21"/>
+				<textFieldExpression><![CDATA[$F{cidade_final}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="0" width="28" height="20" uuid="fb0bafc7-73b9-4213-80ee-2d4b1691f6cf"/>
+				<textFieldExpression><![CDATA[$F{cidade_inicial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="20" width="92" height="20" uuid="8049ab48-c6b6-4588-9205-fe1074556150"/>
+				<textFieldExpression><![CDATA[$F{documento2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="0" width="100" height="20" uuid="5a30e716-931c-443c-8011-5afb73bef8a0"/>
+				<textFieldExpression><![CDATA[$F{nomeCidade1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="398" y="0" width="93" height="20" uuid="3b7a9f26-edbf-4a33-a6c3-900c4e82197c"/>
+				<textFieldExpression><![CDATA[$F{nomeCidade2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="70">
+			<textField>
+				<reportElement x="494" y="40" width="61" height="20" uuid="e33c3b89-cc39-4a2d-8952-8f84657521af"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="5" y="40" width="100" height="20" uuid="c1044235-5d54-417a-bf94-3ada41191db6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="20" width="209" height="20" uuid="9a03ce38-20d0-4502-8a56-c17c0bad7900"/>
+				<textFieldExpression><![CDATA[$F{mensagem}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="214" y="0" width="45" height="20" uuid="75f4b080-859f-4ce2-85ce-d7dc21b77ecd"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Veículo: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="259" y="0" width="100" height="20" uuid="9983cb21-64d5-4897-a925-539d17f5ecf3"/>
+				<textFieldExpression><![CDATA[$F{numero_carro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="0" width="129" height="20" uuid="012acf25-8b2a-4893-b56d-489777d18084"/>
+				<textFieldExpression><![CDATA[$F{motorista}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="0" width="52" height="20" uuid="3c5d090c-a8b6-4bd6-b433-83993db7d700"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Motorista: ]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

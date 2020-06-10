@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="iReportSellsByDate" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f13c8af-6dbf-41bc-9580-8d3f3a69832b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataSessao" class="java.lang.String"/>
+	<parameter name="codFuncionario" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT c.sessao, c.data_abertura, c.horario_abertura, c.data_fechamento, c.horario_fechamento,
+ c.valor_final, f.codigo, f.login, v.codigo_bilhete, v.valor, v.dataV, v.horaV, v.servico_codigo, s.data_viagem, s.horario_viagem, l.prefixo
+FROM caixa c, venda v, funcionario f, linha l, cidade ci1, cidade ci2, servico s
+WHERE c.funcionario_codigo = f.codigo AND f.codigo = v.funcionario_codigo AND c.data_abertura = $P{dataSessao} AND c.funcionario_codigo = $P{codFuncionario}
+ AND s.codigo = v.servico_codigo AND v.linha_id = l.id AND l.cidade_inicial = ci1.codigo AND l.cidade_final = ci2.codigo
+ORDER BY v.horaV;]]>
+	</queryString>
+	<field name="sessao" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="data_abertura" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horario_abertura" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="data_fechamento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horario_fechamento" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_final" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="login" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_bilhete" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dataV" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horaV" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="servico_codigo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="data_viagem" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horario_viagem" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prefixo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="32" width="43" height="13" uuid="347f9dfa-d790-4259-8acd-1aab0dc3bb38"/>
+				<text><![CDATA[Usuário: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="353" height="20" uuid="4bdc9505-cdd8-4a0b-8638-64b4b8576659"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Faculdade de Tecnologia de presidente Prudente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="43" y="32" width="57" height="13" uuid="90c3cd1d-9e2b-428e-9a35-38223d4458f2"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="32" width="100" height="13" uuid="b1182629-df4c-4ddb-a49d-959b709cbab2"/>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="32" width="41" height="13" uuid="34ba4d3d-fbe0-43d7-99b1-54f139356deb"/>
+				<text><![CDATA[Sessão: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="241" y="32" width="52" height="13" uuid="a6dff207-4c70-4ed0-a30b-1a3cd56e243c"/>
+				<textFieldExpression><![CDATA[$F{sessao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="52" width="83" height="13" uuid="166d78e2-3b88-49d7-8f96-38c05c05943e"/>
+				<text><![CDATA[Data de Abertura: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="83" y="52" width="82" height="13" uuid="846209ee-9c25-4c19-b898-eb7d8a5d45b9"/>
+				<textFieldExpression><![CDATA[$F{data_abertura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="52" width="77" height="13" uuid="e9d252a6-0bc3-4e10-9a00-1599ee0d8af6"/>
+				<textFieldExpression><![CDATA[$F{horario_abertura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="65" width="83" height="13" uuid="bf7f44f9-85ca-4241-ba19-16af6451853b"/>
+				<text><![CDATA[Data de Fechamento: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="83" y="65" width="82" height="13" uuid="9d5a938e-bcf6-4f8b-88d9-9450d289203f"/>
+				<textFieldExpression><![CDATA[$F{data_fechamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="65" width="77" height="13" uuid="c2c62912-7975-4482-8724-40d5bfd5b9bd"/>
+				<textFieldExpression><![CDATA[$F{horario_fechamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="385" y="0" width="79" height="13" uuid="c12abd10-820f-42db-b3b1-96667fe5189e"/>
+				<text><![CDATA[Vendas Gerais: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="464" y="0" width="81" height="13" uuid="73142792-7248-47e3-beea-060411169599"/>
+				<textFieldExpression><![CDATA[$F{valor_final}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="16" width="43" height="14" uuid="a06a9fb0-7208-41ae-851d-ae39905ca1cd"/>
+				<text><![CDATA[Bilhete: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="16" width="40" height="14" uuid="c8bca129-96fd-45cd-a23f-f2cf18cfa1bb"/>
+				<text><![CDATA[Data: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="83" y="16" width="39" height="14" uuid="c3a8c9d9-f240-4819-b785-1a9883743079"/>
+				<text><![CDATA[Hora: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="122" y="16" width="46" height="14" uuid="177924f8-6672-467f-a9ed-47298ced7541"/>
+				<text><![CDATA[Valor: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="16" width="44" height="14" uuid="47a0f204-edfb-451d-b0a1-c51d6b55780b"/>
+				<text><![CDATA[Serviço: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="16" width="50" height="14" uuid="2362894b-f314-45bf-847e-f0100b82b596"/>
+				<text><![CDATA[Prefixo: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="262" y="16" width="55" height="14" uuid="fa67bda7-f55e-49e1-83c2-23f1397edaba"/>
+				<text><![CDATA[Venda: ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="43" height="14" uuid="2f29aae4-1951-4a1f-82f6-a1d5e15f3817"/>
+				<textFieldExpression><![CDATA[$F{codigo_bilhete}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="0" width="40" height="14" uuid="9f3ed094-aa08-4ff1-ad9f-52fdf870c40c"/>
+				<textFieldExpression><![CDATA[$F{data_viagem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="0" width="39" height="14" uuid="bd1c5dda-c2dd-4dd2-becb-bb2d90d678eb"/>
+				<textFieldExpression><![CDATA[$F{horario_viagem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="0" width="46" height="14" uuid="3f9e64c8-09e7-4b56-bdba-6023c89f9939"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="0" width="44" height="14" uuid="1ff2b1cc-14c2-4e37-8bd7-97f67123ad73"/>
+				<textFieldExpression><![CDATA[$F{servico_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="0" width="50" height="14" uuid="901e7a37-8a58-4de3-a5fe-d981263e7cb1"/>
+				<textFieldExpression><![CDATA[$F{prefixo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="55" height="14" uuid="379149e0-7542-4017-abdc-e1643182f7f2"/>
+				<textFieldExpression><![CDATA[$F{dataV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="0" width="54" height="14" uuid="66b63a09-11c0-4611-b67b-25aa645c1ae2"/>
+				<textFieldExpression><![CDATA[$F{horaV}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="39" width="100" height="15" uuid="8c68d729-ec47-4c88-aec4-02a82d6809ad"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
